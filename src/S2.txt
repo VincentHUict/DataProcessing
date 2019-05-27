@@ -1,0 +1,60 @@
+1.
+select code,omschrijving from cursussen where lengte =4;
+
+select * from medewerkers order by functie, gbdatum desc;
+
+select cursussen from uitvoeringen where locatie = 'UTRECHT' or locatie = 'MAASTRICHT';
+
+select naam, voorl from medewerkers where !(naam = 'JANSEN' and voorl = 'R');
+
+2.
+insert into uitvoeringen (cursus, begindatum, docent, locatie) values ('S02', '13-03-20', 7369, 'LEERDAM');
+
+3.
+insert into medewerkers (mnr, naam, voorl, functie, chef, gbdatum, maandsal, afd, geslacht)
+values (7333, 'Neuteboom', 'D', 'stagiair', 7902, '11-11-2000', 500, 30, 'M');
+
+insert into medewerkers (mnr, naam, voorl, functie, chef, gbdatum, maandsal, afd, geslacht)
+values (7334, 'Winkel', 'A', 'stagiair', 7902, '11-11-1998', 500, 30, 'M');
+
+4.
+update schalen
+set ondergrens = 4001
+where snr = 5;
+
+insert into schalen (snr, ondergrens, bovengrens, toelage)
+values (6, 3001, 4000, 300);
+
+5.
+insert into cursussen (code, omschrijving, type, lengte)
+values ('DPG', 'Dataprocessing ', 'ALG', 5)
+
+insert into uitvoeringen (cursus, begindatum, docent, locatie)
+values ('DPG', '01-09-2019', 7900, 'UTRECHT')
+
+insert into uitvoeringen (cursus, begindatum, docent, locatie)
+values ('DPG', '01-01-2019', 7901, 'UTRECHT')
+
+insert into inschrijvingen (cursist, cursus, begindatum, evaluatie)
+values (7333, 'DPG', '01-09-2018', 2)
+
+insert into inschrijvingen (cursist, cursus, begindatum, evaluatie)
+values (7334, 'DPG', '01-09-2018', 2)
+
+6.
+update medewerkers
+set maandsal = maandsal * 1,055
+where functie = 'verkoper';
+
+update medewerkers
+set maandsal = maandsal * 1,07
+where functie = 'manager';
+
+7.
+Dit lukt niet omdat er een bepaalde link is tussen de gegevens die je
+probeert te verwijderen en de medewerkers. Wanneer je dit zou doen dan 
+zou de data verloren.
+
+8.
+insert into afdelingen (anr, naam, locatie, hoofd)
+values (70, 'Financien', 'LEERDAM', 7899)
