@@ -1,0 +1,40 @@
+1.
+select c.code, u.begindatum, c.lengte, m.naam
+from medewerkers m, cursussen c, uitvoeringen u
+where u.docent = m.mnr
+and u.cursus = c.code;
+
+select m.naam as deelnemer, d.naam as docent
+from medewerkers d
+join uitvoeringen u 
+on (u.docent = d.mnr)
+join inschrijvingen i 
+using (cursus, begindatum)
+join medewerkers m 
+on (i.cursist = m.mnr) 
+where cursus = 'S02';
+
+2.
+select a.naam, m.naam
+from afdelingen a
+join medewerkers m
+on m.mnr = a.hoofd;
+
+3.
+select m.naam, a.naam, a.locatie
+from medewerkers m
+join afdelingen a
+on m.afd = a.anr;
+
+4.
+select m.naam
+from medewerkers m
+join inschrijvingen i
+on m.mnr = i.cursist
+where cursus = 'S02' and i.begindatum = '12-04-99';
+
+5.
+select m.naam, s.toelage
+from medewerkers m
+join schalen s
+on m.maandsal > s.ondergrens and m.maandsal < s.bovengrens;
