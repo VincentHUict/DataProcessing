@@ -1,0 +1,39 @@
+1.
+select mnr, functie, gbdatum 
+from medewerkers
+where gbdatum < to_date ('01-01-1960', 'dd-mm-yyyy')
+and functie in ('TRAINER', 'VERKOPER');
+
+select mnr, naam, voorl
+from medewerkers
+where naam like '% %';
+
+2.
+select cursus, begindatum, count(*)
+from inschrijvingen
+where extract (year from begindatum) = 1999
+group by cursus, begindatum
+having count(*) >= 3;
+
+select cursist,cursus
+from inschrijvingen
+group by cursist,cursus
+having count(*) > 1;
+
+3.
+select cursus, count(*) 
+from uitvoeringen
+group by cursus;
+
+4.
+select round(months_between(max(GBDATUM), min(GBDATUM)) / 12) as jaren 
+from medewerkers;
+
+select round(months_between(sysdate, median(gbdatum))/12) as leeftijd
+from medewerkers;
+
+5.
+select count(*) as aantal_werknemers, 
+    avg(nvl(m.comm, 0)) as gemiddeld, 
+    avg(m.comm) as gemiddeld_verkoper
+    from medewerkers m;
