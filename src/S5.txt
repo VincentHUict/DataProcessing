@@ -1,0 +1,60 @@
+1.
+select mnr
+from medewerkers, inschrijvingen
+where cursus = 'XML'
+and mnr in (select mnr 
+            from inschrijvingen
+            where cursus = 'JAV');
+
+select mnr 
+from medewerkers m, afdelingen a
+where a.anr != 20;
+
+select mnr
+from medewerkers
+where not exists (select mnr
+                    from inschrijvingen
+                    where mnr = cursist
+                    and cursus = 'JAV');
+
+select mnr, naam
+from medewerkers
+where mnr in (select chef 
+                from medewerkers);
+                
+select mnr, naam
+from medewerkers
+where mnr in (select medewerkers 
+                from medewerkers
+                where chef is null);
+
+select *
+from uitvoeringen
+where begindatum between to_date('31-12-1998', 'dd-mm-yyyy')
+                        and to_date('01-01-2000', 'dd-mm-yyyy')
+and exists (select code
+            from cursussen 
+            where type = 'ALG');
+
+2.
+select u.cursus, u.begindatum, count(*) as aantal_inschrijvingen
+from uitvoeringen u
+join inschrijvingen i
+on (u.cursus = i.cursus and i.begindatum = u.begindatum)
+group by u.cursus, u.begindatum
+order by begindatum;
+
+select naam, voorl
+from medewerkers m, cursussen c, uitvoeringen u, inschrijvingen i
+where mnr = docent
+and chef = cursist
+and code = u.cursus
+and i.begindatum = u.begindatum
+and type = 'ALG';
+
+3.
+select * 
+from medewerkers m
+where not exists (select * 
+                    from uitvoeringen u
+                    where u.docent = m.mnr);
